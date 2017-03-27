@@ -27,7 +27,7 @@ var ReactS3Uploader = require('react-s3-uploader');
     signingUrlHeaders={{ additional: headers }}
     signingUrlQueryParams={{ additional: query-params }}
     signingUrlWithCredentials={ true }      // in case when need to pass authentication credentials via CORS
-    signingUrlData={{ filename: 'filename', filetype: 'image' }}
+    modifySigningUrlData={(file) => ({filename: 'my/file/path/' + file.name, filetype: file.type})}
     uploadRequestHeaders={{ 'x-amz-acl': 'public-read' }}  // this is the default
     contentDisposition="auto"
     scrubFilename={(filename) => filename.replace(/[^\w\d_\-\.]+/ig, '')}
