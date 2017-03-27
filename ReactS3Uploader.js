@@ -20,7 +20,7 @@ var ReactS3Uploader = React.createClass({
           React.PropTypes.object,
           React.PropTypes.func
         ]),
-        signingUrlData: React.PropTypes.object,
+        modifySigningUrlData: React.PropTypes.func,
         signingUrlWithCredentials: React.PropTypes.bool,
         uploadRequestHeaders: React.PropTypes.object,
         contentDisposition: React.PropTypes.string,
@@ -51,13 +51,8 @@ var ReactS3Uploader = React.createClass({
         };
     },
 
-    handleChange: function() {
-      this.fileElement = ReactDOM.findDOMNode(this)
-      this.props.onChange ? this.props.onChange(this.fileElement, this.uploadFile) : this.uploadFile()
-    },
-
-    uploadFile: function(options) {
-        this.myUploader = new S3Upload(objectAssign({
+    uploadFile: function() {
+        this.myUploader = new S3Upload({
             fileElement: this.fileElement,
             signingUrl: this.props.signingUrl,
             getSignedUrl: this.props.getSignedUrl,
@@ -68,13 +63,13 @@ var ReactS3Uploader = React.createClass({
             signingUrlMethod: this.props.signingUrlMethod,
             signingUrlHeaders: this.props.signingUrlHeaders,
             signingUrlQueryParams: this.props.signingUrlQueryParams,
-            signingUrlData: this.props.signingUrlData,
+            modifySigningUrlData: this.props.modifySigningUrlData,
             signingUrlWithCredentials: this.props.signingUrlWithCredentials,
             uploadRequestHeaders: this.props.uploadRequestHeaders,
             contentDisposition: this.props.contentDisposition,
             server: this.props.server,
             scrubFilename: this.props.scrubFilename
-        }, options));
+        });
     },
 
     abort: function() {
@@ -90,7 +85,7 @@ var ReactS3Uploader = React.createClass({
     },
 
     getInputProps: function() {
-        var temporaryProps = objectAssign({}, this.props, {type: 'file', onChange: this.handleChange});
+        var temporaryProps = objectAssign({}, this.props, {type: 'file', onChange: this.uploadFile});
         var inputProps = {};
 
         var invalidProps = Object.keys(ReactS3Uploader.propTypes);
