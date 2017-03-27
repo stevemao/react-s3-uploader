@@ -91,7 +91,7 @@ var ReactS3Uploader = React.createClass({
     },
 
     getInputProps: function() {
-        var temporaryProps = objectAssign({}, this.props, {type: 'file', onChange: this.handleChange});
+        var temporaryProps = objectAssign({}, this.props, {type: 'file', onChange: this.handleChange, multiple: true});
         var inputProps = {};
 
         var invalidProps = Object.keys(ReactS3Uploader.propTypes);
