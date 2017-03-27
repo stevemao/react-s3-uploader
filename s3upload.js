@@ -10,7 +10,7 @@ S3Upload.prototype.fileElement = null;
 S3Upload.prototype.files = null;
 
 S3Upload.prototype.onFinishS3Put = function(signResult, file) {
-    return console.log('base.onFinishS3Put()', signResult.publicUrl);
+    return console.log('base.onFinishS3Put()', signResult.publicUrl || signResult);
 };
 
 S3Upload.prototype.preprocess = function(file, next) {
@@ -120,7 +120,7 @@ S3Upload.prototype.executeOnSignedUrl = function(file, callback) {
 };
 
 S3Upload.prototype.uploadToS3 = function(file, signResult) {
-    var xhr = this.createCORSRequest('PUT', signResult.signedUrl);
+    var xhr = this.createCORSRequest('PUT', signResult.signedUrl || signResult);
     if (!xhr) {
         this.onError('CORS not supported', file);
     } else {
