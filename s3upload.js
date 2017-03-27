@@ -75,7 +75,7 @@ S3Upload.prototype.createCORSRequest = function(method, url, opts) {
     return xhr;
 };
 
-S3Upload.prototype.executeOnSignedUrl = function(file, callback) {
+S3Upload.prototype.executeOnSignedUrl = function(file, callback, data) {
     var fileName = this.scrubFilename(file.name);
     var queryString = '?objectName=' + fileName + '&contentType=' + encodeURIComponent(file.type);
     if (this.signingUrlQueryParams) {
@@ -109,7 +109,7 @@ S3Upload.prototype.executeOnSignedUrl = function(file, callback) {
             return this.onError('Could not contact request signing server. Status = ' + xhr.status, file);
         }
     }.bind(this);
-    return xhr.send();
+    return xhr.send(this.signingUrlData);
 };
 
 S3Upload.prototype.uploadToS3 = function(file, signResult) {
