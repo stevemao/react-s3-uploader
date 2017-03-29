@@ -9,23 +9,6 @@ S3Upload.prototype.signingUrlMethod = 'GET';
 S3Upload.prototype.fileElement = null;
 S3Upload.prototype.files = null;
 
-S3Upload.prototype.onFinishS3Put = function(signResult, file) {
-    return console.log('base.onFinishS3Put()', signResult);
-};
-
-S3Upload.prototype.preprocess = function(file, next) {
-    console.log('base.preprocess()', file);
-    return next(file);
-};
-
-S3Upload.prototype.onProgress = function(percent, status, file) {
-    return console.log('base.onProgress()', percent, status);
-};
-
-S3Upload.prototype.onError = function(status, file) {
-    return console.log('base.onError()', status);
-};
-
 S3Upload.prototype.scrubFilename = function(filename) {
     return filename.replace(/[^\w\d_\-\.]+/ig, '');
 };
