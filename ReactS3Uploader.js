@@ -3,9 +3,10 @@
 var React = require('react'),
     ReactDOM = require('react-dom'),
     S3Upload = require('./s3upload.js'),
-    objectAssign = require('object-assign');
+    objectAssign = require('object-assign'),
+    createClass = require('create-react-class');
 
-var ReactS3Uploader = React.createClass({
+var ReactS3Uploader = createClass({
 
     propTypes: {
         signingUrl: React.PropTypes.string,
