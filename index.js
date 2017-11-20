@@ -86,7 +86,7 @@ var ReactS3Uploader = createClass({
     },
 
     render: function() {
-        return React.DOM.input(this.getInputProps());
+        return React.createElement('input', this.getInputProps());
     },
 
     getInputProps: function() {
